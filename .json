@@ -1,0 +1,25 @@
+{
+  "image": "11notes/caddy",
+  "name": "caddy",
+  "root": "/caddy",
+  "arch":"linux/amd64,linux/arm64,linux/arm/v7",
+  "semver": {
+    "version": "2.10.0"
+  },
+  "readme": {
+    "description": "Run caddy rootless and distroless.",
+    "introduction":"Caddy is a web server written in Go, known for its simplicity and automatic HTTPS features. It acts as a powerful and flexible reverse proxy, handling various protocols like HTTP, HTTPS, WebSockets, gRPC, and FastCGI.",
+    "built": {
+      "caddy": "https://github.com/caddyserver/caddy"
+    },
+    "distroless": {
+      "layers": [
+        "11notes/distroless",
+        "11notes/distroless:curl"
+      ]
+    },
+    "comparison": {
+      "image": "caddy:2.10.0"
+    }
+  }
+}

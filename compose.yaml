@@ -1,0 +1,29 @@
+name: "proxy"
+services:
+  caddy:
+    image: "11notes/caddy:2.10.0"
+    read_only: true
+    environment:
+      TZ: "Europe/Zurich"
+    ports:
+      - "80:80/tcp"
+      - "443:443/tcp"
+    volumes:
+      - "caddy.etc:/caddy/etc"
+      - "caddy.var:/caddy/var"
+      # optional volume (can be tmpfs instead) to store backups of your config
+      - "caddy.backup:/caddy/backup"
+    networks:
+      frontend:
+    sysctls:
+      # allow rootless container to access port 80 and higher
+      net.ipv4.ip_unprivileged_port_start: 80
+    restart: "always"
+
+volumes:
+  caddy.etc:
+  caddy.var:
+  caddy.backup:
+
+networks:
+  frontend:

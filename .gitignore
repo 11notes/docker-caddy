@@ -1,0 +1,4 @@
+# default
+maintain/
+node_modules/
+.env

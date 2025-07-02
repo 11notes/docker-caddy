@@ -1,0 +1,34 @@
+{
+	"apps": {
+		"http": {
+			"servers": {
+        "health": {
+					"listen": ["127.0.0.1:3000"],
+					"routes": [
+						{
+							"handle": [{
+								"handler": "static_response",
+								"status_code": 200
+							}]
+						}
+					]
+				},
+				"demo": {
+					"listen": [":80"],
+					"routes": [
+						{
+							"handle": [{
+								"handler": "static_response",
+								"body": "11notes/caddy"
+							}]
+						}
+					]
+				}
+			}
+		}
+	},
+  "storage":{
+    "module": "file_system",
+    "root": "/caddy/var"
+  }
+}
