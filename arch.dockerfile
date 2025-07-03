@@ -5,8 +5,7 @@
   ARG APP_UID=1000 \
       APP_GID=1000 \
       BUILD_ROOT=/go/caddy/cmd/caddy \
-      BUILD_BIN=/caddy \
-      APP_LIBTORRENT_VERSION=2.0.11
+      BUILD_BIN=/caddy
 
   # :: FOREIGN IMAGES
   FROM 11notes/distroless AS distroless
@@ -58,7 +57,7 @@
 # ╚═════════════════════════════════════════════════════╝
   # :: HEADER
   FROM scratch
-
+  
   # :: default arguments
     ARG TARGETPLATFORM \
         TARGETOS \
