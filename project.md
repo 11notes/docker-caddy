@@ -17,7 +17,7 @@ If you value security, simplicity and optimizations to the extreme, then this im
 ${{ content_comparison }}
 
 ${{ title_config }}
-```yaml
+```json
 ${{ include: ./rootfs/caddy/etc/default.json }}
 ```
 
