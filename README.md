@@ -38,6 +38,45 @@ Below you find a comparison between this image and the most used or original one
 | **rootless?** | ✅ | ❌ |
 
 
+# DEFAULT CONFIG 📑
+```yaml
+{
+	"apps": {
+		"http": {
+			"servers": {
+        "health": {
+					"listen": ["127.0.0.1:3000"],
+					"routes": [
+						{
+							"handle": [{
+								"handler": "static_response",
+								"status_code": 200
+							}]
+						}
+					]
+				},
+				"demo": {
+					"listen": [":80"],
+					"routes": [
+						{
+							"handle": [{
+								"handler": "static_response",
+								"body": "11notes/caddy"
+							}]
+						}
+					]
+				}
+			}
+		}
+	},
+  "storage":{
+    "module": "file_system",
+    "root": "/caddy/var"
+  }
+}
+
+```
+
 # VOLUMES 📁
 * **/caddy/etc** - Directory of your default.json config
 * **/caddy/var** - Directory of all dynamic data
@@ -115,7 +154,7 @@ docker pull quay.io/11notes/caddy:2.10.0
 >This image is not based on another image but uses [scratch](https://hub.docker.com/_/scratch) as the starting layer.
 >The image consists of the following distroless layers that were added:
 >* [11notes/distroless](https://github.com/11notes/docker-distroless/blob/master/arch.dockerfile) - contains users, timezones and Root CA certificates
->* [11notes/distroless:curl](https://github.com/11notes/docker-distroless/blob/master/curl.dockerfile) - app to execute HTTP or UNIX requests
+>* [11notes/distroless:curl](https://github.com/11notes/docker-distroless/blob/master/curl.dockerfile) - app to execute HTTP requests
 
 # BUILT WITH 🧰
 * [caddy](https://github.com/caddyserver/caddy)
@@ -135,4 +174,4 @@ docker pull quay.io/11notes/caddy:2.10.0
 # ElevenNotes™️
 This image is provided to you at your own risk. Always make backups before updating an image to a different version. Check the [releases](https://github.com/11notes/docker-caddy/releases) for breaking changes. If you have any problems with using this image simply raise an [issue](https://github.com/11notes/docker-caddy/issues), thanks. If you have a question or inputs please create a new [discussion](https://github.com/11notes/docker-caddy/discussions) instead of an issue. You can find all my other repositories on [github](https://github.com/11notes?tab=repositories).
 
-*created 07.07.2025, 08:21:11 (CET)*
+*created 03.08.2025, 02:18:00 (CET)*
