@@ -16,6 +16,11 @@ If you value security, simplicity and optimizations to the extreme, then this im
 
 ${{ content_comparison }}
 
+${{ title_config }}
+```yaml
+${{ include: ./rootfs/caddy/etc/default.json }}
+```
+
 ${{ title_volumes }}
 * **${{ json_root }}/etc** - Directory of your default.json config
 * **${{ json_root }}/var** - Directory of all dynamic data
