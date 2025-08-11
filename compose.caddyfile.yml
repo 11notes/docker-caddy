@@ -1,8 +1,18 @@
 name: "proxy"
+
+x-lockdown: &lockdown
+  # prevents write access to the image itself
+  read_only: true
+  # prevents any process within the container to gain more privileges
+  security_opt:
+    - "no-new-privileges=true"
+
 services:
   caddy:
     image: "11notes/caddy:2.10.0"
-    read_only: true
+    # use Caddyfile instead of json
+    command: ["run", "--config", "/caddy/etc/Caddyfile"]
+    <<: *lockdown
     environment:
       TZ: "Europe/Zurich"
     ports:

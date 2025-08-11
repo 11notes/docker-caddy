@@ -1,4 +1,13 @@
-${{ content_synopsis }} This image will run caddy [rootless](https://github.com/11notes/RTFM/blob/main/linux/container/image/rootless.md) and [distroless](https://github.com/11notes/RTFM/blob/main/linux/container/image/distroless.md), for maximum security.
+${{ content_synopsis }} This image will run caddy [rootless](https://github.com/11notes/RTFM/blob/main/linux/container/image/rootless.md) and [distroless](https://github.com/11notes/RTFM/blob/main/linux/container/image/distroless.md), for maximum security. This image will by default use the JSON format. If you don’t want that but you want to use the Caddyfile format, simply check the [compose.caddyfile.yml](https://github.com/11notes/docker-caddy/blob/master/compose.caddyfile.yml) for the command and make sure your Caddyfile contains at least these settings for the storage and health check to work:
+
+```
+{
+	storage file_system /caddy/var
+}
+127.0.0.1:3000 {
+    respond / 200
+}
+```
 
 ${{ content_uvp }} Good question! Because ...
 

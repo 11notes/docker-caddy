@@ -4,36 +4,30 @@
   # GLOBAL
   ARG APP_UID=1000 \
       APP_GID=1000 \
-      BUILD_ROOT=/go/caddy/cmd/caddy \
-      BUILD_BIN=/caddy
+      BUILD_SRC=caddyserver/caddy.git \
+      BUILD_BIN=/caddy \
+      BUILD_ROOT=/go/caddy/cmd/caddy
 
   # :: FOREIGN IMAGES
   FROM 11notes/distroless AS distroless
-  FROM 11notes/distroless:curl AS distroless-curl
-  FROM 11notes/util:bin AS util-bin
+  FROM 11notes/distroless:localhealth AS distroless-localhealth
   FROM 11notes/util AS util
 
 # ╔═════════════════════════════════════════════════════╗
 # ║                       BUILD                         ║
 # ╚═════════════════════════════════════════════════════╝
-  # :: caddy
-  FROM golang:1.24-alpine AS build
-  COPY --from=util-bin / /
+# :: CADDY
+  FROM 11notes/go:1.24 AS build
   ARG APP_VERSION \
+      BUILD_SRC \
       BUILD_ROOT \
       BUILD_BIN \
       TARGETARCH \
       TARGETPLATFORM \
       TARGETVARIANT
 
-  ENV CGO_ENABLED=0
-
   RUN set -ex; \
-    apk --update --no-cache add \
-      git;
-
-  RUN set -ex; \
-    git clone https://github.com/caddyserver/caddy.git -b v${APP_VERSION};
+    eleven git clone ${BUILD_SRC} v${APP_VERSION};
 
   RUN set -ex; \
     cd ${BUILD_ROOT}; \
@@ -42,11 +36,10 @@
   RUN set -ex; \
     eleven distroless ${BUILD_BIN};
 
-  # :: file system
+# :: FILE-SYSTEM
   FROM alpine AS file-system
   COPY --from=util / /
   ARG APP_ROOT
-  USER root
 
   RUN set -ex; \
     eleven mkdir /distroless/caddy/{etc,var,backup}
@@ -82,7 +75,7 @@
 
   # :: multi-stage
     COPY --from=distroless / /
-    COPY --from=distroless-curl / /
+    COPY --from=distroless-localhealth / /
     COPY --from=build /distroless/ /
     COPY --from=file-system --chown=${APP_UID}:${APP_GID} /distroless/ /
     COPY --chown=${APP_UID}:${APP_GID} ./rootfs/ /
@@ -92,7 +85,7 @@
 
 # :: MONITORING
   HEALTHCHECK --interval=5s --timeout=2s --start-period=5s \
-    CMD ["/usr/local/bin/curl", "-kILs", "--fail", "-o", "/dev/null", "http://127.0.0.1:3000"]
+    CMD ["/usr/local/bin/localhealth", "https://127.0.0.1:3000", "-I"]
 
 # :: EXECUTE
   USER ${APP_UID}:${APP_GID}
