@@ -5,7 +5,7 @@ ${{ content_synopsis }} This image will run caddy [rootless](https://github.com/
 	storage file_system /caddy/var
 }
 127.0.0.1:3000 {
-    respond / 200
+  respond / 200
 }
 ```
 
