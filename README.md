@@ -37,6 +37,7 @@ Below you find a comparison between this image and the most used or original one
 | **distroless?** | ✅ | ❌ |
 | **rootless?** | ✅ | ❌ |
 
+⚠️ `Caddyfile` must first be converted to `default.json` file using `caddy adapt --pretty --config /caddy/etc/Caddyfile --adapter caddyfile` 
 
 # DEFAULT CONFIG 📑
 ```json
