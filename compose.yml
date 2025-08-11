@@ -10,6 +10,8 @@ x-lockdown: &lockdown
 services:
   caddy:
     image: "11notes/caddy:2.10.0"
+    # use Caddyfile instead of json
+    # command: ["run", "--config", "/caddy/etc/Caddyfile"]
     <<: *lockdown
     environment:
       TZ: "Europe/Zurich"
