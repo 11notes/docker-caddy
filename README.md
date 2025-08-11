@@ -10,7 +10,16 @@ Run caddy rootless and distroless.
 Caddy is a web server written in Go, known for its simplicity and automatic HTTPS features. It acts as a powerful and flexible reverse proxy, handling various protocols like HTTP, HTTPS, WebSockets, gRPC, and FastCGI.
 
 # SYNOPSIS 📖
-**What can I do with this?** This image will run caddy [rootless](https://github.com/11notes/RTFM/blob/main/linux/container/image/rootless.md) and [distroless](https://github.com/11notes/RTFM/blob/main/linux/container/image/distroless.md), for maximum security.
+**What can I do with this?** This image will run caddy [rootless](https://github.com/11notes/RTFM/blob/main/linux/container/image/rootless.md) and [distroless](https://github.com/11notes/RTFM/blob/main/linux/container/image/distroless.md), for maximum security. This image will by default use the JSON format. If you don’t want that but you want to use the Caddyfile format, simply check the [compose.caddyfile.yml](https://github.com/11notes/docker-caddy/blob/master/compose.caddyfile.yml) for the command and make sure your Caddyfile contains at least these settings for the storage and health check to work:
+
+```
+{
+	storage file_system /caddy/var
+}
+127.0.0.1:3000 {
+    respond / 200
+}
+```
 
 # UNIQUE VALUE PROPOSITION 💶
 **Why should I run this image and not the other image(s) that already exist?** Good question! Because ...
@@ -30,9 +39,9 @@ If you value security, simplicity and optimizations to the extreme, then this im
 # COMPARISON 🏁
 Below you find a comparison between this image and the most used or original one.
 
-| **image** | 11notes/caddy:2.10.0 | caddy:2.10.0 |
+| **image** | 11notes/caddy:2.10.0 | caddy |
 | ---: | :---: | :---: |
-| **image size on disk** | 19.3MB | 50.5MB |
+| **image size on disk** | 14.4MB | 50.5MB |
 | **process UID/GID** | 1000/1000 | 0/0 |
 | **distroless?** | ✅ | ❌ |
 | **rootless?** | ✅ | ❌ |
@@ -84,10 +93,18 @@ Below you find a comparison between this image and the most used or original one
 # COMPOSE ✂️
 ```yaml
 name: "proxy"
+
+x-lockdown: &lockdown
+  # prevents write access to the image itself
+  read_only: true
+  # prevents any process within the container to gain more privileges
+  security_opt:
+    - "no-new-privileges=true"
+
 services:
   caddy:
     image: "11notes/caddy:2.10.0"
-    read_only: true
+    <<: *lockdown
     environment:
       TZ: "Europe/Zurich"
     ports:
@@ -154,7 +171,7 @@ docker pull quay.io/11notes/caddy:2.10.0
 >This image is not based on another image but uses [scratch](https://hub.docker.com/_/scratch) as the starting layer.
 >The image consists of the following distroless layers that were added:
 >* [11notes/distroless](https://github.com/11notes/docker-distroless/blob/master/arch.dockerfile) - contains users, timezones and Root CA certificates
->* [11notes/distroless:curl](https://github.com/11notes/docker-distroless/blob/master/curl.dockerfile) - app to execute HTTP requests
+>* [11notes/distroless:localhealth](https://github.com/11notes/docker-distroless/blob/master/localhealth.dockerfile) - app to execute HTTP requests only on 127.0.0.1
 
 # BUILT WITH 🧰
 * [caddy](https://github.com/caddyserver/caddy)
@@ -174,4 +191,4 @@ docker pull quay.io/11notes/caddy:2.10.0
 # ElevenNotes™️
 This image is provided to you at your own risk. Always make backups before updating an image to a different version. Check the [releases](https://github.com/11notes/docker-caddy/releases) for breaking changes. If you have any problems with using this image simply raise an [issue](https://github.com/11notes/docker-caddy/issues), thanks. If you have a question or inputs please create a new [discussion](https://github.com/11notes/docker-caddy/discussions) instead of an issue. You can find all my other repositories on [github](https://github.com/11notes?tab=repositories).
 
-*created 03.08.2025, 02:20:05 (CET)*
+*created 12.08.2025, 00:16:45 (CET)*
