@@ -3,11 +3,11 @@
   "name": "caddy",
   "root": "/caddy",
   "semver": {
-    "version": "2.10.0"
+    "version": "2.10.2"
   },
   "readme": {
     "description": "Run caddy rootless and distroless.",
-    "introduction":"Caddy is a web server written in Go, known for its simplicity and automatic HTTPS features. It acts as a powerful and flexible reverse proxy, handling various protocols like HTTP, HTTPS, WebSockets, gRPC, and FastCGI.",
+    "introduction": "Caddy is a web server written in Go, known for its simplicity and automatic HTTPS features. It acts as a powerful and flexible reverse proxy, handling various protocols like HTTP, HTTPS, WebSockets, gRPC, and FastCGI.",
     "built": {
       "caddy": "https://github.com/caddyserver/caddy"
     },
