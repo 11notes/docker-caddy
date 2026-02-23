@@ -3,7 +3,7 @@
   "name": "caddy",
   "root": "/caddy",
   "semver": {
-    "version": "2.10.2"
+    "version": "2.11.1"
   },
   "readme": {
     "description": "Run caddy rootless and distroless.",
