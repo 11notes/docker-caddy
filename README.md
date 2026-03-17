@@ -10,7 +10,7 @@ Run caddy rootless and distroless.
 Caddy is a web server written in Go, known for its simplicity and automatic HTTPS features. It acts as a powerful and flexible reverse proxy, handling various protocols like HTTP, HTTPS, WebSockets, gRPC, and FastCGI.
 
 # SYNOPSIS 📖
-**What can I do with this?** This image will run caddy [rootless](https://github.com/11notes/RTFM/blob/main/linux/container/image/rootless.md) and [distroless](https://github.com/11notes/RTFM/blob/main/linux/container/image/distroless.md), for maximum security. This image will by default use the JSON format. If you don’t want that but you want to use the Caddyfile format, simply check the [compose.yml](https://github.com/11notes/docker-caddy/blob/master/compose.caddyfile.yml) for the command and make sure your Caddyfile contains at least these settings for the storage and health check to work:
+**What can I do with this?** This image will run caddy [rootless](https://github.com/11notes/RTFM/blob/main/linux/container/image/rootless.md) and [distroless](https://github.com/11notes/RTFM/blob/main/linux/container/image/distroless.md), for maximum security. This image will by default use the JSON format. If you don’t want that but you want to use the Caddyfile format, simply check the [compose.yml](https://github.com/11notes/docker-caddy/blob/master/compose.yml) for the command and make sure your Caddyfile contains at least these settings for the storage and health check to work:
 
 ```
 {
@@ -193,4 +193,4 @@ docker pull quay.io/11notes/caddy:2.10.0
 # ElevenNotes™️
 This image is provided to you at your own risk. Always make backups before updating an image to a different version. Check the [releases](https://github.com/11notes/docker-caddy/releases) for breaking changes. If you have any problems with using this image simply raise an [issue](https://github.com/11notes/docker-caddy/issues), thanks. If you have a question or inputs please create a new [discussion](https://github.com/11notes/docker-caddy/discussions) instead of an issue. You can find all my other repositories on [github](https://github.com/11notes?tab=repositories).
 
-*created 12.08.2025, 00:25:42 (CET)*
+*created 12.08.2025, 00:27:08 (CET)*
