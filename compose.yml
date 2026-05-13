@@ -9,7 +9,7 @@ x-lockdown: &lockdown
 
 services:
   caddy:
-    image: "11notes/caddy:2.11.2"
+    image: "11notes/caddy:2.11.3"
     # use Caddyfile instead of json
     # command: ["run", "--config", "/caddy/etc/Caddyfile"]
     <<: *lockdown
